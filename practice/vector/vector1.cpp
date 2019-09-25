@@ -14,6 +14,12 @@ int main()
     for(int i=0; i < my_vec.size(); i++)
         cout<< "vector element " << i << " value " << my_vec[i] << endl;
 
+    my_vec.erase(my_vec.begin()+1);
 
+    cout<<endl<<endl;
+
+    for(int i=0; i < my_vec.size(); i++)
+        cout<< "vector element " << i << " value " << my_vec[i] << endl;
+ 
     return 0;
 }
