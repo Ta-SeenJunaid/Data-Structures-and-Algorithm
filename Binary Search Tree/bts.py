@@ -28,3 +28,27 @@ class BinarySearchTree(object):
                 self.insertNode(data, node.rightChild);
             else:
                 node.rightChild = Node(data);
+
+
+    def getMinValue(self):
+        if self.root:
+            return self.getMin(self.root);
+
+
+    def getMin(self, node):
+         if node.leftChild:
+             return self.getMin(node.leftChild);
+
+         return node.data;
+
+
+    def getMaxValue(self):
+        if self.root:
+            return self.getMax(self.root);
+
+
+    def getMax(self, node):
+         if node.rightChild:
+             return self.getMax(node.rightChild);
+
+         return node.data;
