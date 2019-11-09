@@ -52,3 +52,17 @@ class BinarySearchTree(object):
              return self.getMax(node.rightChild);
 
          return node.data;
+
+
+    def traverse(self):
+        if self.root:
+            self.traverseINOrder(self.root);
+
+    def traverseINOrder(self, node):
+        if node.leftChild:
+            self.traverseINOrder(node.leftChild);
+
+        print(node.data);
+
+        if node.rightChild:
+            self.traverseINOrder(node.rightChild);
