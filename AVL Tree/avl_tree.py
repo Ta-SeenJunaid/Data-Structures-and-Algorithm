@@ -98,3 +98,20 @@ class AVL(object):
         newRoot.height = max(self.calcHeight(newRoot.leftChild), self.calcHeight(newRoot.rightChild)) + 1
 
         return newRoot
+
+    def traverse(self):
+        if self.root:
+            self.traverseInorder(self.root)
+
+
+    def traverseInorder(self, node):
+
+        if node.leftChild:
+            self.traverseInorder(node.leftChild)
+
+        print(node.data)
+
+        if node.rightChild:
+            self.traverseInorder(node.rightChild)
+
+
