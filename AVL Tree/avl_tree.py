@@ -28,7 +28,7 @@ class AVL(object):
         else:
             node.rightChild = self.insertNode(data, node.rightChild)
 
-        node.height = max(node.calcheight(node.leftChild),node.calcheight(node.rightChild)) + 1
+        node.height = max(self.calcHeight(node.leftChild), self.calcHeight(node.rightChild)) + 1
 
         return self.settleViolation(data, node)
 
@@ -87,14 +87,13 @@ class AVL(object):
     def rotateLeft(self, node):
 
         print("Rotating to the left on node ", node.data)
-
         newRoot = node.rightChild
-        oldRootRightChild = newRoot.leftchild
+        oldRootRightChild = newRoot.leftChild
 
-        newRoot.leftchild = node
+        newRoot.leftChild = node
         node.rightChild = oldRootRightChild
 
-        node.height = max(self.calcHeight(node.leftChild), self.calcHeight(node.rightChild)) + 1
+        node.height = max(self.calcHeight(node.leftChild),self.calcHeight(node.rightChild))+1
         newRoot.height = max(self.calcHeight(newRoot.leftChild), self.calcHeight(newRoot.rightChild)) + 1
 
         return newRoot
@@ -115,3 +114,23 @@ class AVL(object):
             self.traverseInorder(node.rightChild)
 
 
+
+avl = AVL()
+
+avl.insert(50)
+avl.insert(60)
+avl.insert(40)
+avl.insert(80)
+avl.insert(90)
+avl.insert(10)
+avl.insert(9)
+avl.insert(8)
+avl.insert(6)
+avl.insert(7)
+avl.insert(5)
+avl.insert(106)
+avl.insert(104)
+avl.insert(102)
+avl.insert(106)
+
+avl.traverse()
