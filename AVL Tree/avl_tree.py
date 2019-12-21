@@ -31,6 +31,32 @@ class AVL(object):
         node.height = max(node.calcheight(node.leftChild),node.calcheight(node.rightChild)) + 1
 
         return self.settleViolation(data, node)
+
+
+
+    def settleViolation(self, data, node):
+
+        balance = self.calcBalance(node)
+
+        if balance > 1 and data < node.leftChild.data:
+            print("Left left situation")
+            return self.rotateRight(node)
+
+        if balance < -1 and data > node.rightChild.data:
+            print("Right right situation")
+            return self.rotateLeft(node)
+
+        if balance > 1 and data > node.leftChild.data:
+            print("Left right situation")
+            node.leftChild = self.rotateLeft(node.leftChild)
+            return self.rotateRight(node)
+
+        if balance < -1 and data < node.rightChild.data:
+            print("Right left situation")
+            node.rightChild = self.rotateRight(node.rightChild)
+            return self.rotateLeft(node)
+
+        return node
         
 
     def calcHeight(self, node):
