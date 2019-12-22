@@ -33,6 +33,48 @@ class AVL(object):
         return self.settleViolation(data, node)
 
 
+    def delete(self, data):
+        if self.root:
+            self.root = self.deleteNode(data, self.root)
+
+
+
+    def deleteNode(self, data, node):
+        if not node:
+            return node
+
+        if data < node.data:
+            node.leftChild = self.deleteNode(data, node.leftChild)
+
+        elif data > node.data:
+            node.rightChild = self.deleteNode(data, node.rightChild)
+
+        else:
+
+            if not node.leftChild and not node.rightChild:
+                print("Removing a leaf node")
+                del node
+                return None
+
+            elif not node.leftChild:
+                print("Removing a node with only right child")
+                tempNode = node.rightChild
+                del node
+                return tempNode
+
+            elif not node.rightChild:
+                print("Removing a node with only left child")
+                tempNode = node.leftChild
+                del node
+                return tempNode
+
+            else:
+                print("Removing a node with both left and right child")
+                tempNode = self.getPredecessor(node.leftChild)
+                node.data = tempNode.data
+                node.leftChild = self.deleteNode(tempNode.data, node.leftChild)
+
+
 
     def settleViolation(self, data, node):
 
@@ -57,7 +99,7 @@ class AVL(object):
             return self.rotateLeft(node)
 
         return node
-        
+
 
     def calcHeight(self, node):
         if not node:
