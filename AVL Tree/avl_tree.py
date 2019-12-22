@@ -74,6 +74,41 @@ class AVL(object):
                 node.data = tempNode.data
                 node.leftChild = self.deleteNode(tempNode.data, node.leftChild)
 
+        #if it is an one node tree
+        if not node:
+            return node
+
+        node.height = max(self.calcHeight(node.leftChild),self.calcHeight(node.rightChild)) + 1
+
+        balance = self.calcBalance(node)
+
+        # left left situation
+        if balance > 1 and self.calcBalance(node.leftChild) >= 0:
+            return self.rotateRight(node)
+
+        # left right situation
+        if balance > 1 and self.calcBalance(node.leftChild) < 0:
+            node.leftChild = self.rotateLeft(node.leftChild)
+            return self.rotateRight(node)
+
+        # right right situation
+        if balance < -1 and self.calcBalance(node.rightChild) <= 0:
+            return self.rotateLeft(node)
+
+        # right left situation
+        if balance < -1 and self.calcBalance(node.rightChild) > 0:
+            node.rightChild = self.rotateRight(node.rightChild)
+            return self.rotateLeft(node)
+
+        return node
+
+
+    def getPredecessor(self, node):
+        if node.rightChild:
+            return self.getPredecessor(node.rightChild)
+
+        return node
+
 
 
     def settleViolation(self, data, node):
@@ -174,5 +209,11 @@ avl.insert(106)
 avl.insert(104)
 avl.insert(102)
 avl.insert(106)
+
+avl.traverse()
+
+avl.delete(6)
+avl.delete(90)
+avl.delete(104)
 
 avl.traverse()
