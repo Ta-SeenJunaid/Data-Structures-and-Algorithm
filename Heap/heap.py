@@ -18,7 +18,13 @@ class Heap(object):
 
 
     def fixUp(self, index):
-        pass
+        parentIndex = int((index - 1) / 2)
+
+        while (parentIndex >= 0 and self.heap[parentIndex] < self.heap[index]):
+            temp = self.heap[index]
+            self.heap[index] = self.heap[parentIndex]
+            self.heap[parentIndex] = temp
+            parentIndex = int((index - 1) / 2)
 
 
 
