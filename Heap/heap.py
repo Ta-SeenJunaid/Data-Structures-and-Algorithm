@@ -34,3 +34,17 @@ class Heap(object):
             return True
         else:
             return False
+
+
+    def heapSort(self):
+
+        for i in range(0, self.currentPosition+1):
+            temp = self.heap[0]
+            print(temp)
+            self.heap[0]= self.heap[self.currentPosition-i]
+            self.heap[self.currentPosition-i] = temp
+            self.fixDown(0, self.currentPosition-i-1)
+
+
+    def fixDown(self, index, upto):
+        pass
