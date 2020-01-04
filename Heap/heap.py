@@ -20,11 +20,11 @@ class Heap(object):
     def fixUp(self, index):
         parentIndex = int((index - 1) / 2)
 
-        while (parentIndex >= 0 and self.heap[parentIndex] < self.heap[index]):
+        while parentIndex >= 0 and self.heap[parentIndex] < self.heap[index]:
             temp = self.heap[index]
             self.heap[index] = self.heap[parentIndex]
             self.heap[parentIndex] = temp
-            parentIndex = int((index - 1) / 2)
+            parentIndex = (int)((index - 1) / 2)
 
 
 
@@ -74,3 +74,15 @@ class Heap(object):
                 index = childToSwap
             else:
                 break
+
+
+
+
+heap = Heap()
+heap.insert(15)
+heap.insert(35)
+heap.insert(10)
+heap.insert(11)
+heap.insert(5)
+
+heap.heapSort()
