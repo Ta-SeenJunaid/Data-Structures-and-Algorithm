@@ -3,7 +3,7 @@ class Heap(object):
     HEAP_LENGTH = 10
 
     def __init__(self):
-        self.heap = [0]*self.HEAP_LENGTH
+        self.heap = [0]*Heap.HEAP_LENGTH
         self.currentPosition = -1
 
 
@@ -47,4 +47,30 @@ class Heap(object):
 
 
     def fixDown(self, index, upto):
-        pass
+
+        while index <= upto:
+
+            leftChild = 2*index+1
+            rightChild = 2*index+2
+
+            if leftChild < upto:
+                childToSwap = None
+
+                if rightChild > upto:
+                    childToSwap = leftChild
+                else:
+                    if self.heap[leftChild] > self.heap[rightChild]:
+                        childToSwap = leftChild
+                    else:
+                        childToSwap = rightChild
+
+                if self.heap[index] < self.heap[childToSwap]:
+                    temp = self.heap[index]
+                    self.heap[index] = self.heap[childToSwap]
+                    self.heap[childToSwap] = temp
+                else:
+                    break
+
+                index = childToSwap
+            else:
+                break
