@@ -1,12 +1,17 @@
-
-
 class HashTable(object):
 
     def __init__(self):
-        pass
+        self.size = 10
+        self.key = []
+        self.value = []
 
-    def hash_function(self):
-        pass
+    def hash_function(self, key):
+
+        sum =0
+        for pos in range(len(key)):
+            sum += ord(key[pos])
+
+        return sum%self.size
 
     def get(self):
         pass
