@@ -39,6 +39,24 @@ class LinkedList(object):
             print(actual_node.data)
             actual_node = actual_node.next_node
 
+    def remove(self, data):
+
+        if self.head is None:
+            return
+
+        self.size = self.size - 1
+
+        current_node = self.head
+        previous_node = None
+
+        while current_node.data != data:
+            previous_node = current_node
+            current_node = current_node.next_node
+
+        if previous_node is None:
+            self.head = current_node.next_node
+        else:
+            previous_node.next_node = current_node.next_node
 
 
 linked_list = LinkedList()
@@ -46,6 +64,10 @@ linked_list.insert_start(5)
 linked_list.insert_start(45)
 linked_list.insert_start(85)
 linked_list.insert_end(100)
+print("Size: ", linked_list.size)
+print("Traversing")
+linked_list.traverse()
+linked_list.remove(45)
 print("Size: ", linked_list.size)
 print("Traversing")
 linked_list.traverse()
