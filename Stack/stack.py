@@ -20,10 +20,12 @@ class Stack:
     def size_stack(self):
         return len(self.stack)
 
+
 stack = Stack()
 stack.push(453)
 stack.push('ABC')
 stack.push(354)
+print("Current Stack: ", stack.stack)
 print("Peek: ", stack.peek())
 print("Size: ", stack.size_stack())
 print("Pop: ", stack.pop())
