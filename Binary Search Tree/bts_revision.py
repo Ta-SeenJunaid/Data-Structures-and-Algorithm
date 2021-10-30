@@ -63,6 +63,22 @@ class BinarySearchTree(object):
         if node.right_child:
             self.in_order_traverse_helper(node.right_child)
 
+    def remove(self, data):
+        if self.root:
+            self.root = self.remove_node(data, self.root)
+
+    def remove_node(self, data, node):
+
+        if not node:
+            return node
+
+        if data < node.data:
+            node.left_child = self.remove_node(data, node.left_child)
+        elif data > node.data:
+            node.right_child = self.remove_node(data, node.right_child)
+        else:
+            pass
+
 
 bst = BinarySearchTree()
 bst.insert(100)
