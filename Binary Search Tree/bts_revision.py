@@ -81,21 +81,21 @@ class BinarySearchTree(object):
                 print("Removing a leaf node.")
                 del node
                 return None
-            if not self.left_child:
+            if not node.left_child:
                 print("Removing a node with only right child.")
                 temp_node = node.right_child
                 del node
                 return temp_node
-            elif not self.right_child:
+            elif not node.right_child:
                 print("Removing a node with only left child")
                 temp_node = node.left_child
                 del node
                 return temp_node
 
             print("Removing node with 2 children")
-            temp_node = self.get_predecessor(node)
+            temp_node = self.get_predecessor(node.left_child)
             node.data = temp_node.data
-            node.left_child = self.remove_node(temp_node.data, node.leftChild)
+            node.left_child = self.remove_node(temp_node.data, node.left_child)
 
         return node
 
@@ -107,20 +107,22 @@ class BinarySearchTree(object):
 
 
 bst = BinarySearchTree()
-bst.insert(100)
-bst.insert(2)
-bst.insert(50)
-bst.insert(1002)
-bst.insert(23)
+bst.insert(10)
 bst.insert(5)
-bst.insert(1013)
-bst.insert(42)
-bst.insert(501)
-bst.insert(1094)
-bst.insert(323)
-bst.insert(57)
-
+bst.insert(15)
+bst.insert(14)
+bst.insert(16)
+bst.insert(4)
+bst.insert(6)
+bst.insert(7)
+bst.insert(2)
 
 bst.in_order_traverse()
 print("Minimum value: ", bst.get_min_value())
 print("Maximum value: ", bst.get_max_value())
+bst.remove(14)
+bst.remove(4)
+bst.remove(6)
+bst.in_order_traverse()
+bst.remove(10)
+bst.in_order_traverse()

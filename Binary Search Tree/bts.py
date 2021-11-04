@@ -63,7 +63,7 @@ class BinarySearchTree(object):
 
         return node
 
-    def getPredecessor(selfself, node):
+    def getPredecessor(self, node):
 
         if node.rightChild:
             return self.getPredecessor(node.rightChild);
