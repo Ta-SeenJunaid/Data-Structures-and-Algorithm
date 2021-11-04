@@ -77,7 +77,21 @@ class BinarySearchTree(object):
         elif data > node.data:
             node.right_child = self.remove_node(data, node.right_child)
         else:
-            pass
+            if not node.left_child and not node.right_child:
+                print("Removing a leaf node.")
+                del node
+                return None
+            if not self.left_child:
+                print("Removing a node with only right child.")
+                temp_node = node.right_child
+                del node
+                return temp_node
+            elif not self.right_child:
+                print("Removing a node with only left child")
+                temp_node = node.left_child
+                del node
+                return temp_node
+
 
 
 bst = BinarySearchTree()
