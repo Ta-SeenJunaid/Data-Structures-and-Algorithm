@@ -92,6 +92,18 @@ class BinarySearchTree(object):
                 del node
                 return temp_node
 
+            print("Removing node with 2 children")
+            temp_node = self.get_predecessor(node)
+            node.data = temp_node.data
+            node.left_child = self.remove_node(temp_node.data, node.leftChild)
+
+        return node
+
+    def get_predecessor(self, node):
+        if node.right_child:
+            return self.get_predecessor(node.right_child)
+
+        return node
 
 
 bst = BinarySearchTree()
