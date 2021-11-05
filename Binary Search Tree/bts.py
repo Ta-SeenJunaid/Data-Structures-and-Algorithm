@@ -2,8 +2,9 @@ class Node(object):
 
     def __init__(self, data):
         self.data = data
-        self.leftChild = None
-        self.rightChild = None
+        self.left_child = None
+        self.right_child = None
+
 
 class BinarySearchTree(object):
 
@@ -14,121 +15,114 @@ class BinarySearchTree(object):
         if not self.root:
             self.root = Node(data)
         else:
-            self.insertNode(data, self.root)
+            self.insert_node(data, self.root)
 
-    def insertNode(self, data, node):
+    def insert_node(self, data, node):
         if data < node.data:
-            if node.leftChild:
-                self.insertNode(data, node.leftChild)
+            if node.left_child:
+                self.insert_node(data, node.left_child)
             else:
-                node.leftChild = Node(data)
+                node.left_child = Node(data)
         else:
-            if node.rightChild:
-                self.insertNode(data, node.rightChild)
+            if node.right_child:
+                self.insert_node(data, node.right_child)
             else:
-                node.rightChild = Node(data)
+                node.right_child = Node(data)
 
-    def removeNode(self, data, node):
+    def get_min_value(self):
+        if self.root:
+            return self.get_min(self.root)
 
+    def get_min(self, node):
+        if node.left_child:
+            return self.get_min(node.left_child)
+
+        return node.data
+
+    def get_max_value(self):
+        if self.root:
+            return self.get_max(self.root)
+
+    def get_max(self, node):
+        if node.right_child:
+            return self.get_max(node.right_child)
+
+        return node.data
+
+    def in_order_traverse(self):
+        if self.root:
+            self.in_order_traverse_helper(self.root)
+
+    def in_order_traverse_helper(self, node):
+        if node.left_child:
+            self.in_order_traverse_helper(node.left_child)
+
+        print(node.data)
+
+        if node.right_child:
+            self.in_order_traverse_helper(node.right_child)
+
+    def remove(self, data):
+        if self.root:
+            self.root = self.remove_node(data, self.root)
+
+    def remove_node(self, data, node):
+
+        # Not sure, might be unnecessary
         if not node:
             return node
 
         if data < node.data:
-            node.leftChild = self.removeNode(data, node.leftChild)
+            node.left_child = self.remove_node(data, node.left_child)
         elif data > node.data:
-            node.rightChild = self.removeNode(data, node.rightChild)
+            node.right_child = self.remove_node(data, node.right_child)
         else:
-
-            if not node.leftChild and not node.rightChild:
-                print("Removing a leaf node.....")
+            if not node.left_child and not node.right_child:
+                print("Removing a leaf node.")
                 del node
                 return None
-
-            if not node.leftChild:
-                print("Removing a node with single right child")
-                tempNode = node.rightChild
+            if not node.left_child:
+                print("Removing a node with only right child.")
+                temp_node = node.right_child
                 del node
-                return tempNode
-
-            elif not node.rightChild:
-                print("Removing a node with single left child")
-                tempNode = node.leftChild
+                return temp_node
+            elif not node.right_child:
+                print("Removing a node with only left child")
+                temp_node = node.left_child
                 del node
-                return tempNode
+                return temp_node
 
-            print("Removing node with two childrensS")
-            tempNode = self.getPredecessor(node.leftChild)
-            node.data = tempNode.data
-            node.leftChild = self.removeNode(tempNode.data, node.leftChild)
+            print("Removing node with 2 children")
+            temp_node = self.get_predecessor(node.left_child)
+            node.data = temp_node.data
+            node.left_child = self.remove_node(temp_node.data, node.left_child)
 
         return node
 
-    def getPredecessor(self, node):
+    def get_predecessor(self, node):
+        if node.right_child:
+            return self.get_predecessor(node.right_child)
 
-        if node.rightChild:
-            return self.getPredecessor(node.rightChild);
-
-        return node;
-
-
-
-    def remove(self, data):
-        if self.root:
-            self.root = self.removeNode(data, self.root)
-
-
-
-
-    def getMinValue(self):
-        if self.root:
-            return self.getMin(self.root)
-
-
-    def getMin(self, node):
-         if node.leftChild:
-             return self.getMin(node.leftChild)
-
-         return node.data;
-
-
-    def getMaxValue(self):
-        if self.root:
-            return self.getMax(self.root)
-
-
-    def getMax(self, node):
-         if node.rightChild:
-             return self.getMax(node.rightChild)
-
-         return node.data;
-
-
-    def traverse(self):
-        if self.root:
-            self.traverseINOrder(self.root)
-
-    def traverseINOrder(self, node):
-        if node.leftChild:
-            self.traverseINOrder(node.leftChild)
-
-        print("%s " % node.data)
-
-        if node.rightChild:
-            self.traverseINOrder(node.rightChild)
+        return node
 
 
 bst = BinarySearchTree()
-bst.insert(43)
-bst.insert(3)
-bst.insert(343)
-bst.insert(23)
-bst.insert(54)
-bst.insert(21)
+bst.insert(10)
+bst.insert(5)
+bst.insert(15)
+bst.insert(14)
+bst.insert(16)
 bst.insert(4)
-bst.insert(34)
+bst.insert(6)
+bst.insert(7)
+bst.insert(2)
 
-bst.remove(23)
-
-print(bst.getMinValue())
-print(bst.getMaxValue())
-bst.traverse()
+bst.in_order_traverse()
+print("Minimum value: ", bst.get_min_value())
+print("Maximum value: ", bst.get_max_value())
+bst.remove(14)
+bst.remove(4)
+bst.remove(6)
+bst.in_order_traverse()
+bst.remove(10)
+bst.in_order_traverse()

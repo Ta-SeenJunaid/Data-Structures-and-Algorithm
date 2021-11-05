@@ -1,4 +1,3 @@
-
 class Node(object):
 
     def __init__(self, data):
@@ -69,6 +68,7 @@ class BinarySearchTree(object):
 
     def remove_node(self, data, node):
 
+        # Not sure, might be unnecessary
         if not node:
             return node
 
