@@ -7,6 +7,12 @@ class Node:
         self.left_child = None
         self.right_child = None
 
+
+class AVL:
+
+    def __init__(self):
+        self.root = None
+
     @staticmethod
     def calc_height(self, node):
         if not node:
