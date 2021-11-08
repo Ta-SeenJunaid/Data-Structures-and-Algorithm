@@ -41,17 +41,28 @@ class AVL:
             return self.rotate_left(node)
         if balance > 1 and data > node.left_child.data:
             print("Left right heavy situation")
-            node.left_child = self.rotate_left(node)
+            node.left_child = self.rotate_left(node.left_child)
             return self.rotate_right(node)
         if balance < -1 and data < node.right_child.data:
             print("Right left heavy situation")
-            node.right_child = self.rotate_right(node)
+            node.right_child = self.rotate_right(node.right_child)
             return self.rotate_left(node)
 
         return node
 
+    def in_order_traverse(self):
+        if self.root:
+            self.in_order_traverse_helper(self.root)
 
-    @staticmethod
+    def in_order_traverse_helper(self, node):
+        if node.left_child:
+            self.in_order_traverse_helper(node.left_child)
+
+        print(node.data)
+
+        if node.right_child:
+            self.in_order_traverse_helper(node.right_child)
+
     def calc_height(self, node):
         if not node:
             return -1
@@ -91,6 +102,30 @@ class AVL:
                                      self.calc_height(new_parent_node.right_child)) + 1
 
         return new_parent_node
+
+avl = AVL()
+
+avl.insert(105)
+avl.insert(103)
+avl.insert(104)
+
+avl.insert(30)
+avl.insert(40)
+avl.insert(50)
+
+
+avl.insert(29)
+avl.insert(28)
+avl.insert(27)
+
+avl.insert(15)
+avl.insert(17)
+avl.insert(16)
+
+avl.insert(1000)
+avl.insert(2000)
+
+avl.in_order_traverse()
 
 
 
