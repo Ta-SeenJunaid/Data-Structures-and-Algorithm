@@ -143,9 +143,25 @@ class AVL:
             return node
 
         node.height = max(self.calc_height(node.left_child), self.calc_height(node.right_child)) + 1
-        
+
         balance = self.calc_balance(node)
 
+        if balance > 1 and self.calc_balance(node.left_child) >= 0:
+            print("Left left heavy situation")
+            return self.rotate_right(node)
+        if balance < -1 and self.calc_balance(node.right_child) <= 0:
+            print("Right right heavy situation")
+            return self.rotate_left(node)
+        if balance > 1 and self.calc_balance(node.left_child) < 0:
+            print("Left right heavy situation")
+            node.left_child = self.rotate_left(node.left_child)
+            return self.rotate_right(node)
+        if balance < -1 and self.calc_balance(node.right_child) > 0:
+            print("Right left heavy situation")
+            node.right_child = self.rotate_right(node.right_child)
+            return self.rotate_left(node)
+
+        return node
 
     def get_predecessor(self, node):
         if node.right_child:
@@ -178,6 +194,8 @@ avl.insert(2000)
 
 avl.in_order_traverse()
 
-
+avl.remove(105)
+avl.remove(103)
+avl.in_order_traverse()
 
 
