@@ -103,6 +103,57 @@ class AVL:
 
         return new_parent_node
 
+    def remove(self, data):
+        if self.root:
+            self.root = self.remove_node(data, self.root)
+
+    def remove_node(self, data, node):
+
+        # Not sure, might be unnecessary
+        if not node:
+            return node
+
+        if data < node.data:
+            node.left_child = self.remove_node(data, node.left_child)
+        elif data > node.data:
+            node.right_child = self.remove_node(data, node.right_child)
+        else:
+            if not node.left_child and not node.right_child:
+                print("Removing a leaf node.")
+                del node
+                return None
+            if not node.left_child:
+                print("Removing a node with only right child.")
+                temp_node = node.right_child
+                del node
+                return temp_node
+            elif not node.right_child:
+                print("Removing a node with only left child")
+                temp_node = node.left_child
+                del node
+                return temp_node
+
+            print("Removing node with 2 children")
+            temp_node = self.get_predecessor(node.left_child)
+            node.data = temp_node.data
+            node.left_child = self.remove_node(temp_node.data, node.left_child)
+
+        # If the tree had just a single node
+        if not node:
+            return node
+
+        node.height = max(self.calc_height(node.left_child), self.calc_height(node.right_child)) + 1
+        
+        balance = self.calc_balance(node)
+
+
+    def get_predecessor(self, node):
+        if node.right_child:
+            return self.get_predecessor(node.right_child)
+
+        return node
+
+
 avl = AVL()
 
 avl.insert(105)
