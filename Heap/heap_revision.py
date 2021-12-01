@@ -22,6 +22,14 @@ class Heap:
         else:
             return False
 
+    def heap_sort(self):
+        for i in range(0, self.current_position):
+            temp = self.heap[0]
+            print(temp)
+            self.heap[0] = self.heap[self.current_position - i]
+            self.heap[self.current_position - i] = temp
+            self.fix_down(0, self.current_position -i -1)
+
     def fix_up(self, index):
         parent_index = int((index-1)/2)
 
@@ -30,3 +38,6 @@ class Heap:
             self.heap[index] = self.heap[parent_index]
             self.heap[parent_index] = temp
             parent_index = int((parent_index-1)/2)
+
+    def fix_down(self, start, end):
+        pass
