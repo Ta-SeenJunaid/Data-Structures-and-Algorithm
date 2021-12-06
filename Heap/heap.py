@@ -1,6 +1,6 @@
 
 class Heap(object):
-    HEAP_LENGTH = 10
+    HEAP_LENGTH = 100
 
     def __init__(self):
         self.heap = [0]*Heap.HEAP_LENGTH
@@ -78,11 +78,30 @@ class Heap(object):
 
 
 
+# heap = Heap()
+# heap.insert(15)
+# heap.insert(35)
+# heap.insert(10)
+# heap.insert(11)
+# heap.insert(5)
+#
+# heap.heapSort()
+
+
 heap = Heap()
 heap.insert(15)
 heap.insert(35)
 heap.insert(10)
 heap.insert(11)
 heap.insert(5)
+heap.insert(-2)
+heap.insert(-25)
+heap.insert(100)
+heap.insert(500)
+heap.insert(10000)
+heap.insert(-200)
+heap.insert(23)
 
 heap.heapSort()
+print("Testing heap")
+print(heap.heap)
